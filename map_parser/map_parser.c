@@ -1,20 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d.h                                            :+:      :+:    :+:   */
+/*   map_parser.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: svolkau <gvardovski@icloud.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/28 12:31:12 by svolkau           #+#    #+#             */
-/*   Updated: 2025/09/28 12:32:46 by svolkau          ###   ########.fr       */
+/*   Created: 2025/09/28 13:57:12 by svolkau           #+#    #+#             */
+/*   Updated: 2025/09/28 14:03:31 by svolkau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CUB3D_H
-#define	CUB3D_H
+#include "../includes/cub3d.h"
 
-# include "../get_next_line/get_next_line.h"
-# include <errno.h>
-
-
-#endif
+int main(void)
+{
+	return(0);
+}
