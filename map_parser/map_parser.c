@@ -6,7 +6,7 @@
 /*   By: svolkau <gvardovski@icloud.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/28 13:57:12 by svolkau           #+#    #+#             */
-/*   Updated: 2025/09/28 20:01:58 by svolkau          ###   ########.fr       */
+/*   Updated: 2025/09/29 20:05:14 by svolkau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,29 +81,6 @@ t_smap	*mapnew(char *str, int index)
 	return (mapnew);
 }
 
-t_smap	*mapreader(int fd, t_smap *map)
-{
-	char	*line_of_map;
-	int		i;
-
-	i = 0;
-	line_of_map = get_next_line(fd);
-	if (!line_of_map)
-		error_printer("Map is empty", map);
-	map = mapnew(ft_strdup(line_of_map), i);
-	while (map)
-	{
-		free(line_of_map);
-		line_of_map = get_next_line(fd);
-		if (!line_of_map)
-			break ;
-		if (line_of_map[0] == '\n')
-			error_printer("Not correct map, found somthing after map", map);
-		mapadd_back(&map, mapnew(ft_strdup(line_of_map), ++i));
-	}
-	return(map);
-}
-
 void error_printer(char *msg, t_smap *map)
 {
 	printf("%s\n", msg);
@@ -120,33 +97,75 @@ void check_pos(t_smap *map, t_smap *priv, int pos, char *set, char *msg)
 	
 }
 
+t_smap	*mapreader(int fd, t_smap *map)
+{
+	char	*line_of_map;
+	int		i;
+
+	i = 0;
+	line_of_map = get_next_line(fd);
+	if (!line_of_map)
+		error_printer("Map is empty", map);
+	if (line_of_map[0] == '\n')
+			error_printer("Not correct map, too many new lines", map);
+	map = mapnew(ft_strdup(line_of_map), i);
+	while (map)
+	{
+		free(line_of_map);
+		line_of_map = get_next_line(fd);
+		if (!line_of_map)
+			break ;
+		if (line_of_map[0] == '\n')
+			error_printer("Not correct map, found somthing after map", map);
+		mapadd_back(&map, mapnew(ft_strdup(line_of_map), ++i));
+	}
+	return(map);
+}
+
 void check_map_valid_char(t_smap *map)
 {
 	int i;
 	int c;
+	int normalchar;
 	t_smap	*priv = NULL;
 
 	c = 0;
+	normalchar = 0;
 	while(map)
 	{
 		i = -1;
 		while (map->str[++i])
-		{	if (!ft_strchr("EWNS10 \n", map->str[i]))
+		{	
+			if (!ft_strchr("EWNS10 \n", map->str[i]))
 				error_printer("Not correct character in map", map);
+			else if (ft_strchr("EWNS10", map->str[i]))
+				normalchar++;
 			if (map->str[i] == ' ')
 				map->str[i] = '2';
 			if (map->str[i] == '0')
-				check_pos(map, priv, i, "10WESN", "Wall is open");
+				{check_pos(map, priv, i, "10WESN", "Wall is open, or maybe floor is not correct");}
+			if (map->str[i] == '1')
+			{
+				if ((!map->str[i - 1] || ft_strchr("2", map->str[i - 1]))
+					&& (!map->str[i + 1] || ft_strchr(" \n\0", map->str[i + 1]))
+					&& (!priv->str[i] || ft_strchr("2\n", priv->str[i]))
+					&& (!map->next || !map->next->str[i] || ft_strchr(" \n\0", map->next->str[i])))
+					error_printer("Wall is not correct", map);
+			}
 			if (ft_strchr("EWNS", map->str[i]))
 			{
 				if (++c != 1)
-					error_printer("Not correct player start position", map);
-				check_pos(map, priv, i, "10\n", "Not correct player start position");
+					error_printer("Too many players", map);
+				check_pos(map, priv, i, "10", "Not correct player start position");
 			}	
 		}
 		priv = map;
 		map = map->next;
-	}		
+	}
+	if (!normalchar)
+			error_printer("Map is empty", map);
+	if (c == 0)
+			error_printer("No player start position", map);
 }
 
 int main(int gc, char **gv)
