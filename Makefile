@@ -7,7 +7,8 @@ AR = ar rcs
 SRCGET = get_next_line/get_next_line.c \
 	get_next_line/get_next_line_utils.c
 SRC = map_parser/map_parser.c \
-	map_parser/map_parser_add.c 
+	map_parser/map_parser_add.c \
+	map_parser/map_vpath.c 
 OBJECTS = $(SRC:.c=.o)
 OBJECTSGET = $(SRCGET:.c=.o)
 %$(SRCDIR).o: %$(SRCDIR).c
