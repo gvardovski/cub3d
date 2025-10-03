@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: svolkau <gvardovski@icloud.com>            +#+  +:+       +#+        */
+/*   By: svolkau <svolkau@student.42warsaw.pl>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/28 12:31:12 by svolkau           #+#    #+#             */
-/*   Updated: 2025/10/02 20:29:02 by svolkau          ###   ########.fr       */
+/*   Updated: 2025/10/03 20:58:13 by svolkau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	printmap(t_cmap *map);
 void	printgridmap(char **map);
 void	freegridmap(char **grid);
 char	**map_to_arr(t_cmap *map);
-void	check_path(char **grid, int y, int x);
+int		check_path(char **grid, int y, int x, int rows);
 void	check_map_valid_char(t_cmlx *cb3d);
 int		check_pos(t_cmap *map, t_cmap *priv, int pos, char *set);
 t_cmap	*mapnew(char *str, int index);

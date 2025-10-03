@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_vpath.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: svolkau <gvardovski@icloud.com>            +#+  +:+       +#+        */
+/*   By: svolkau <svolkau@student.42warsaw.pl>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/02 16:06:32 by svolkau           #+#    #+#             */
-/*   Updated: 2025/10/02 16:49:02 by svolkau          ###   ########.fr       */
+/*   Updated: 2025/10/03 21:31:00 by svolkau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,33 +44,59 @@ char	**map_to_arr(t_cmap *map)
 	return (grid);
 }
 
-void	check_path(char **grid, int y, int x)
+int	check_path(char **grid, int y, int x, int rows)
 {
-	if (grid[y][x] == '1' || grid[y][x] == '2' )
-		return ;
-	grid[y][x] = '1';
-	check_path(grid, y + 1, x);
-	check_path(grid, y - 1, x);
-	check_path(grid, y, x + 1);
-	check_path(grid, y, x - 1);
+    int c;
+
+    c = 0;
+	grid[y][x] = '3';
+    if (y < 0 || y >= rows || x < 0 || x >= (int)ft_strlen(grid[y]))
+        return 0;
+    if (y + 1 < rows && x >= 0 && x < (int)ft_strlen(grid[y + 1])) {
+        if (ft_strchr("0WSEN", grid[y + 1][x]))
+            return 1;
+        else if (grid[y + 1][x] == '1')
+            c += check_path(grid, y + 1, x, rows);
+    }
+    if (y - 1 >= 0 && x >= 0 && x < (int)ft_strlen(grid[y - 1])) {
+        if (ft_strchr("0WSEN", grid[y - 1][x]))
+            return 1;
+        else if (grid[y - 1][x] == '1')
+            c += check_path(grid, y - 1, x, rows);
+    }
+    if (x + 1 < (int)ft_strlen(grid[y])) {
+        if (ft_strchr("0WSEN", grid[y][x + 1]))
+            return 1;
+        else if (grid[y][x + 1] == '1')
+            c += check_path(grid, y, x + 1, rows);
+    }
+    if (x - 1 >= 0) {
+        if (ft_strchr("0WSEN", grid[y][x - 1]))
+            return 1;
+        else if (grid[y][x - 1] == '1')
+            c += check_path(grid, y, x - 1, rows);
+    }
+    return c;
 }
 
 int	validate_path(char **gridmap, t_cmlx *cb3d)
 {
 	int		y;
 	int		x;
-
+	int		rows;
+	
 	y = -1;
-	while (++y < mapsize(cb3d->map))
+	rows = mapsize(cb3d->map);
+	while (++y < rows)
 	{
 		x = -1;
-		while (++x < (int)ft_strlen(cb3d->map->str))
+		while (++x < (int)ft_strlen(gridmap[y]))
 		{
-			if (gridmap[y][x] != '1' && gridmap[y][x] != '2' && gridmap[y][x] != '\n' && gridmap[y][x] != '\0')
+			if (gridmap[y][x] == '1')
 			{
-				printf("Y = %d | X = %d | %c\n", y, x, gridmap[y][x]);
-				return (0);
-			}
+				if (!check_path(gridmap, y, x, rows))
+					return (0);
+			}	
 		}
 	}
 	return (1);
@@ -81,12 +107,10 @@ void	mapcheckvalidpath(t_cmlx *cb3d)
 	char	**gridmap;
 
 	gridmap = map_to_arr(cb3d->map);
-	check_path(gridmap, cb3d->playery, cb3d->playerx);
-	printgridmap(gridmap);
 	if (!validate_path(gridmap, cb3d))
 	{
 		freegridmap(gridmap);
-		error_printer("Map is not valid", cb3d);
+		error_printer("Map is not correct", cb3d);
 	}
 	freegridmap(gridmap);
 }
