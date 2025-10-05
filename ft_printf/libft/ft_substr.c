@@ -6,15 +6,15 @@
 /*   By: svolkau <gvardovski@icloud.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/08 22:51:35 by svolkau           #+#    #+#             */
-/*   Updated: 2024/12/18 16:45:45 by svolkau          ###   ########.fr       */
+/*   Updated: 2025/10/05 16:27:28 by svolkau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static size_t	fstrlen(const char *str)
+static int	fstrlen(const char *str)
 {
-	size_t	i;
+	int	i;
 
 	i = 0;
 	while (str[i])
@@ -22,14 +22,14 @@ static size_t	fstrlen(const char *str)
 	return (i);
 }
 
-char	*ft_substr(char const *s, unsigned int start, size_t len)
+char	*ft_substr(char const *s, unsigned int start, int len)
 {
 	char	*ptr;
-	size_t	i;
+	int	i;
 
 	if (!s)
 		return (0);
-	if (fstrlen(s) < start)
+	if ((unsigned int)fstrlen(s) < start)
 		return (ft_strdup(""));
 	if (fstrlen(s + start) < len)
 		len = fstrlen(s + start);

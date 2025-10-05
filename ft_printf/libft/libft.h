@@ -6,7 +6,7 @@
 /*   By: svolkau <gvardovski@icloud.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 16:41:26 by svolkau           #+#    #+#             */
-/*   Updated: 2024/12/19 12:55:15 by svolkau          ###   ########.fr       */
+/*   Updated: 2025/10/05 16:24:49 by svolkau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,12 @@ int		ft_isascii(int param);
 int		ft_isprint(int param);
 int		ft_toupper(int param);
 int		ft_tolower(int param);
+int		ft_isspace(char c);
 int		ft_lstsize(t_list *lst);
 int		ft_memcmp(const void *str1, const void *str2, size_t n);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
 int		ft_atoi(const char *str);
-size_t	ft_strlen(const char *str);
+int		ft_strlen(const char *str);
 size_t	ft_strlcpy(char *dest, const char *str, size_t n);
 size_t	ft_strlcat(char *dest, const char *str, size_t n);
 void	ft_lstadd_back(t_list **lst, t_list *new);
@@ -62,7 +63,7 @@ char	*ft_strnstr(const char *str1, const char *str2, size_t n);
 char	*ft_strchr(const char *str, int c);
 char	*ft_strrchr(const char *str, int c);
 char	*ft_strdup(const char *str);
-char	*ft_substr(char const *s, unsigned int start, size_t len);
+char	*ft_substr(char const *s, unsigned int start, int len);
 char	*ft_strjoin(char const *s1, char const *s2);
 char	*ft_strtrim(char const *s1, char const *set);
 char	*ft_itoa(int n);

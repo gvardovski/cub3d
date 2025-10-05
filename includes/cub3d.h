@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: svolkau <svolkau@student.42warsaw.pl>      +#+  +:+       +#+        */
+/*   By: svolkau <gvardovski@icloud.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/28 12:31:12 by svolkau           #+#    #+#             */
-/*   Updated: 2025/10/03 20:58:13 by svolkau          ###   ########.fr       */
+/*   Updated: 2025/10/05 18:18:37 by svolkau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,29 @@
 #define	CUB3D_H
 
 # include "../get_next_line/get_next_line.h"
+# include "../ft_printf/include/printf.h"
+# include "../minilibx-linux/mlx.h"
 # include <errno.h>
+# include <math.h>
+
+# define HEIGHT 768
+# define WIDTH 1024
+
+typedef enum e_type
+{
+	NO,
+	SO,
+	EA,
+	WE
+}					t_type;
+
+typedef struct s_texture
+{	
+	enum e_type			type;
+	int					width;
+	int					height;
+	char				*text_path;
+}						t_texture;
 
 typedef struct s_map
 {
@@ -23,11 +45,21 @@ typedef struct s_map
 	struct s_map	*next;	
 }					t_cmap;
 
+typedef struct s_config
+{
+	struct s_texture	textures[4];
+	int					floor_color;
+	int					ceiling_color;
+}						t_config;
+
 typedef struct s_mlx
 {
 	int				playerx;
 	int				playery;
 	int				fd;
+	void			*mlx;
+	void			*win;
+	void			*img;
 	struct s_map	*map;
 }					t_cmlx;
 
@@ -47,6 +79,8 @@ t_cmap	*maplast(t_cmap *map);
 void	freemap(t_cmap **map, void (*del)(char *));
 void	mapdelone(t_cmap *map, void (*del)(char *));
 void	del(char *str);
-void	mapcheckvalidpath(t_cmlx *cb3d);
+void	check_wall_path(t_cmlx *cb3d);
+void	freeall(t_cmlx *cb3d);
+void	map_reader(t_cmlx *cb3d);
 
 #endif

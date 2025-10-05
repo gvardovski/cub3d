@@ -6,7 +6,7 @@
 /*   By: svolkau <gvardovski@icloud.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/12 15:37:26 by svolkau           #+#    #+#             */
-/*   Updated: 2025/01/24 12:47:03 by svolkau          ###   ########.fr       */
+/*   Updated: 2025/10/05 16:23:34 by svolkau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@ char	*find_line( int fd, char *buf, char *content);
 char	*get_line(char *line);
 char	*ft_strjoin(char const *s1, char const *s2);
 char	*ft_strchr(const char *str, int c);
-size_t	ft_strlen(const char *str);
+int		ft_strlen(const char *str);
 char	*ft_strdup(const char *str);
-char	*ft_substr(char const *s, unsigned int start, size_t len);
+char	*ft_substr(char const *s, unsigned int start, int len);
 
 #endif

@@ -1,14 +1,17 @@
 NAME = cub3d
 NAMEPRINT = ft_printf/libftprintf.a
+NAMEMLX = minilibx-linux/libmlx.a
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -g
+MLXFLAGS = -Lmlx -lXext -lX11
 RM = rm -f
 AR = ar rcs
 SRCGET = get_next_line/get_next_line.c \
 	get_next_line/get_next_line_utils.c
 SRC = map_parser/map_parser.c \
 	map_parser/map_parser_add.c \
-	map_parser/map_vpath.c 
+	map_parser/map_wall_path.c \
+	cb3d.c
 OBJECTS = $(SRC:.c=.o)
 OBJECTSGET = $(SRCGET:.c=.o)
 %$(SRCDIR).o: %$(SRCDIR).c
@@ -16,7 +19,8 @@ OBJECTSGET = $(SRCGET:.c=.o)
 	@echo "Create object Cub3d"
 $(NAME): $(OBJECTS) $(OBJECTSGET)
 	$(MAKE) -C ./ft_printf
-	@$(CC) $(SRC) $(SRCGET) $(NAMEPRINT) $(CFLAGS) -o $(NAME)
+	$(MAKE) -C ./minilibx-linux
+	@$(CC) $(SRC) $(SRCGET) $(NAMEPRINT) $(NAMEMLX) $(CFLAGS) $(MLXFLAGS) -o $(NAME)
 	@echo "CC finished Cub3d"
 all: $(NAME)
 clean:

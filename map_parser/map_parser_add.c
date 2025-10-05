@@ -6,7 +6,7 @@
 /*   By: svolkau <gvardovski@icloud.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 12:01:28 by svolkau           #+#    #+#             */
-/*   Updated: 2025/10/02 16:19:27 by svolkau          ###   ########.fr       */
+/*   Updated: 2025/10/05 16:05:03 by svolkau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,9 +94,9 @@ void	freegridmap(char **grid)
 	free(grid);
 }
 
-void printmap(t_cmap *map)
+void	printmap(t_cmap *map)
 {
-	while(map)
+	while (map)
 	{
 		printf("%s", map->str);
 		map = map->next;
@@ -104,14 +104,16 @@ void printmap(t_cmap *map)
 	printf("\n");
 }
 
-void printgridmap(char **map)
+void	printgridmap(char **map)
 {
-	int i = -1, j;
+	int	j;
+	int	i;
 
-	while(map[++i])
+	i = -1;
+	while (map[++i])
 	{
 		j = -1;
-		while(map[i][++j])
+		while (map[i][++j])
 			printf("%c", map[i][j]);
 	}
 	printf("\n");

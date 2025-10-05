@@ -6,15 +6,15 @@
 /*   By: svolkau <gvardovski@icloud.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/14 20:32:13 by svolkau           #+#    #+#             */
-/*   Updated: 2025/09/28 15:54:54 by svolkau          ###   ########.fr       */
+/*   Updated: 2025/10/05 16:19:16 by svolkau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t	ft_strlen(const char *str)
+int	ft_strlen(const char *str)
 {
-	size_t	i;
+	int	i;
 
 	i = 0;
 	if (str != NULL)
