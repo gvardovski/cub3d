@@ -6,7 +6,7 @@
 /*   By: svolkau <gvardovski@icloud.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/28 12:31:12 by svolkau           #+#    #+#             */
-/*   Updated: 2025/10/05 18:18:37 by svolkau          ###   ########.fr       */
+/*   Updated: 2025/10/06 14:15:35 by svolkau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,13 +38,6 @@ typedef struct s_texture
 	char				*text_path;
 }						t_texture;
 
-typedef struct s_map
-{
-	char			*str;
-	int				index;	
-	struct s_map	*next;	
-}					t_cmap;
-
 typedef struct s_config
 {
 	struct s_texture	textures[4];
@@ -52,14 +45,27 @@ typedef struct s_config
 	int					ceiling_color;
 }						t_config;
 
+typedef struct s_map
+{
+	char			*str;
+	int				index;	
+	struct s_map	*next;	
+}					t_cmap;
+
 typedef struct s_mlx
 {
+	int 			endian;
+	int 			size_line;
+	int 			bpp;
 	int				playerx;
 	int				playery;
+	char 			orient;
 	int				fd;
+	char 			*win_data;
 	void			*mlx;
 	void			*win;
 	void			*img;
+	struct s_config *cng;
 	struct s_map	*map;
 }					t_cmlx;
 

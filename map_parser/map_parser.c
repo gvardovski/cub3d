@@ -6,7 +6,7 @@
 /*   By: svolkau <gvardovski@icloud.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/28 13:57:12 by svolkau           #+#    #+#             */
-/*   Updated: 2025/10/05 18:31:16 by svolkau          ###   ########.fr       */
+/*   Updated: 2025/10/06 14:14:03 by svolkau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ void	freeall(t_cmlx *cb3d)
 	free(cb3d->mlx);
 	if (cb3d->fd > 0)
 		close(cb3d->fd);
+	free(cb3d->cng);
 	freemap(&cb3d->map, del);
 	free(cb3d->map);
 	free(cb3d);
@@ -56,6 +57,7 @@ void	check_player_pos(t_cmlx *cb3d, t_cmap *head, t_cmap *priv, int pos)
 		error_printer("Too many players", cb3d);
 	else
 	{
+		cb3d->orient = head->str[pos];
 		cb3d->playerx = pos;
 		cb3d->playery = head->index;
 	}
