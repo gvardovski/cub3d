@@ -6,7 +6,7 @@
 /*   By: svolkau <gvardovski@icloud.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 12:01:28 by svolkau           #+#    #+#             */
-/*   Updated: 2025/10/05 16:05:03 by svolkau          ###   ########.fr       */
+/*   Updated: 2025/10/09 19:57:07 by svolkau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,6 +115,6 @@ void	printgridmap(char **map)
 		j = -1;
 		while (map[i][++j])
 			printf("%c", map[i][j]);
+		printf("\n");
 	}
-	printf("\n");
 }

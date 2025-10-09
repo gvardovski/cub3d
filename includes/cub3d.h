@@ -6,7 +6,7 @@
 /*   By: svolkau <gvardovski@icloud.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/28 12:31:12 by svolkau           #+#    #+#             */
-/*   Updated: 2025/10/06 14:15:35 by svolkau          ###   ########.fr       */
+/*   Updated: 2025/10/09 20:08:25 by svolkau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,17 @@
 # include <errno.h>
 # include <math.h>
 
-# define HEIGHT 768
-# define WIDTH 1024
+# define HEIGHT 900
+# define WIDTH 1200
+# define KEY_ESC 65307
+# define KEY_LEFT 65361
+# define KEY_RIGHT 65363
+# define KEY_UP 65362
+# define KEY_DOWN 65364
+# define KEY_A 97
+# define KEY_D 100
+# define KEY_W 119
+# define KEY_S 115
 
 typedef enum e_type
 {
@@ -54,11 +63,38 @@ typedef struct s_map
 
 typedef struct s_mlx
 {
+	float			wall_x;
+	double			pos_x;
+	double			pos_y;
+	double 			dir_x;
+	double 			dir_y;
+	double 			plane_x;
+	double 			plane_y;
+	double			playerx;
+	double			playery;
+	double			camera_x;
+	double			ray_dirx;
+	double			ray_diry;
+	double			side_dist_x;
+	double			side_dist_y;
+	double			delta_dist_x;
+	double			delta_dist_y;
+	double			perp_wall_dist;
+	int				draw_start;
+	int				draw_end;
+	int				line_height;
+	char 			**gridmap;
+	int				side;
+	int				step_x;
+	int				step_y;
+	int				hit;
+	int				map_x;
+	int				map_y;
+	int				tex_x;
+	int				tex_y;
 	int 			endian;
 	int 			size_line;
 	int 			bpp;
-	int				playerx;
-	int				playery;
 	char 			orient;
 	int				fd;
 	char 			*win_data;
@@ -88,5 +124,11 @@ void	del(char *str);
 void	check_wall_path(t_cmlx *cb3d);
 void	freeall(t_cmlx *cb3d);
 void	map_reader(t_cmlx *cb3d);
+void	set_orient(t_cmlx *cb3d);
+void	print_display(t_cmlx *cb3d);
+void	cast_rays(t_cmlx *cb3d);
+char	**map_to_arr(t_cmap *map);
+void	get_delta_dist(t_cmlx *cb3d);
+void	draw_object(t_cmlx *cb3d);
 
 #endif
