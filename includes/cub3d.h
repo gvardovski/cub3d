@@ -6,7 +6,7 @@
 /*   By: svolkau <gvardovski@icloud.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/28 12:31:12 by svolkau           #+#    #+#             */
-/*   Updated: 2025/10/09 20:08:25 by svolkau          ###   ########.fr       */
+/*   Updated: 2025/10/10 15:14:07 by svolkau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ typedef struct s_texture
 	int					width;
 	int					height;
 	char				*text_path;
+	int					*color_arr;
 }						t_texture;
 
 typedef struct s_config
@@ -130,5 +131,8 @@ void	cast_rays(t_cmlx *cb3d);
 char	**map_to_arr(t_cmap *map);
 void	get_delta_dist(t_cmlx *cb3d);
 void	draw_object(t_cmlx *cb3d);
+void	add_color_arr(t_cmlx *cb3d, int texture);
+int		color(int rgb[3]);
+void	printcolorarr(int *color_arr);
 
 #endif

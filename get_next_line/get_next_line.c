@@ -6,7 +6,7 @@
 /*   By: svolkau <gvardovski@icloud.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/12 15:46:49 by svolkau           #+#    #+#             */
-/*   Updated: 2025/01/24 14:58:58 by svolkau          ###   ########.fr       */
+/*   Updated: 2025/10/10 15:09:49 by svolkau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,10 @@ char	*get_next_line(int fd)
 	content = find_line(fd, buf, content);
 	free(buf);
 	if (!content || *content == '\0')
-		return (ft_free(content));
+	{
+		content = ft_free(content);
+		return (NULL);
+	}
 	line = ft_strdup(content);
 	tmp = get_line(line);
 	free(content);

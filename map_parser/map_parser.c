@@ -6,7 +6,7 @@
 /*   By: svolkau <gvardovski@icloud.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/28 13:57:12 by svolkau           #+#    #+#             */
-/*   Updated: 2025/10/09 19:26:55 by svolkau          ###   ########.fr       */
+/*   Updated: 2025/10/10 14:37:28 by svolkau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 void	freeall(t_cmlx *cb3d)
 {
+	if (!cb3d)
+		return ;
 	if (cb3d->mlx)
 		mlx_loop_end(cb3d->mlx);
 	if (cb3d->mlx && cb3d->img)
@@ -27,10 +29,11 @@ void	freeall(t_cmlx *cb3d)
 	}
 	if (cb3d->fd > 0)
 		close(cb3d->fd);
-	free(cb3d->cng);
+	if (cb3d->cng)
+		free(cb3d->cng);
 	freemap(&cb3d->map, del);
-	free(cb3d->map);
-	freegridmap(cb3d->gridmap);
+	if (cb3d->gridmap)
+		freegridmap(cb3d->gridmap);
 	free(cb3d);
 }
 
