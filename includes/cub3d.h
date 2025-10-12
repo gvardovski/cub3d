@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: svolkau <gvardovski@icloud.com>            +#+  +:+       +#+        */
+/*   By: svolkau <svolkau@student.42warsaw.pl>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/28 12:31:12 by svolkau           #+#    #+#             */
-/*   Updated: 2025/10/10 15:14:07 by svolkau          ###   ########.fr       */
+/*   Updated: 2025/10/12 20:46:41 by svolkau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
-#define	CUB3D_H
+# define CUB3D_H
 
 # include "../get_next_line/get_next_line.h"
 # include "../ft_printf/include/printf.h"
@@ -19,13 +19,11 @@
 # include <errno.h>
 # include <math.h>
 
-# define HEIGHT 900
-# define WIDTH 1200
+# define HEIGHT 768
+# define WIDTH 1024
 # define KEY_ESC 65307
 # define KEY_LEFT 65361
 # define KEY_RIGHT 65363
-# define KEY_UP 65362
-# define KEY_DOWN 65364
 # define KEY_A 97
 # define KEY_D 100
 # define KEY_W 119
@@ -40,7 +38,7 @@ typedef enum e_type
 }					t_type;
 
 typedef struct s_texture
-{	
+{
 	enum e_type			type;
 	int					width;
 	int					height;
@@ -64,46 +62,46 @@ typedef struct s_map
 
 typedef struct s_mlx
 {
-	float			wall_x;
-	double			pos_x;
-	double			pos_y;
-	double 			dir_x;
-	double 			dir_y;
-	double 			plane_x;
-	double 			plane_y;
-	double			playerx;
-	double			playery;
-	double			camera_x;
-	double			ray_dirx;
-	double			ray_diry;
-	double			side_dist_x;
-	double			side_dist_y;
-	double			delta_dist_x;
-	double			delta_dist_y;
-	double			perp_wall_dist;
-	int				draw_start;
-	int				draw_end;
-	int				line_height;
-	char 			**gridmap;
-	int				side;
-	int				step_x;
-	int				step_y;
-	int				hit;
-	int				map_x;
-	int				map_y;
-	int				tex_x;
-	int				tex_y;
-	int 			endian;
-	int 			size_line;
-	int 			bpp;
-	char 			orient;
-	int				fd;
-	char 			*win_data;
-	void			*mlx;
-	void			*win;
-	void			*img;
-	struct s_config *cng;
-	struct s_map	*map;
+	float				wall_x;
+	double				pos_x;
+	double				pos_y;
+	double				dir_x;
+	double				dir_y;
+	double				plane_x;
+	double				plane_y;
+	double				pl_x;
+	double				pl_y;
+	double				camera_x;
+	double				ray_dirx;
+	double				ray_diry;
+	double				side_d_x;
+	double				side_d_y;
+	double				delta_d_x;
+	double				delta_d_y;
+	double				perp_wall_dist;
+	int					draw_start;
+	int					draw_end;
+	int					line_height;
+	char				**gridmap;
+	int					side;
+	int					step_x;
+	int					step_y;
+	int					hit;
+	int					map_x;
+	int					map_y;
+	int					tex_x;
+	int					tex_y;
+	int					endian;
+	int					size_line;
+	int					bpp;
+	char				orient;
+	int					fd;
+	char				*win_data;
+	void				*mlx;
+	void				*win;
+	void				*img;
+	struct s_config		*cng;
+	struct s_map		*map;
 }					t_cmlx;
 
 void	freemap(t_cmap **map, void (*del)(char *));
@@ -133,6 +131,6 @@ void	get_delta_dist(t_cmlx *cb3d);
 void	draw_object(t_cmlx *cb3d);
 void	add_color_arr(t_cmlx *cb3d, int texture);
 int		color(int rgb[3]);
-void	printcolorarr(int *color_arr);
+void	printcolorarr(t_texture tex);
 
 #endif

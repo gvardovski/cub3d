@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cb3d.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: svolkau <gvardovski@icloud.com>            +#+  +:+       +#+        */
+/*   By: svolkau <svolkau@student.42warsaw.pl>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/05 17:41:46 by svolkau           #+#    #+#             */
-/*   Updated: 2025/10/10 15:14:16 by svolkau          ###   ########.fr       */
+/*   Updated: 2025/10/12 20:23:15 by svolkau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 void	init_main_struct(t_cmlx *cb3d, char **gv)
 {
 	cb3d->cng = malloc(sizeof(t_config));
-	cb3d->cng->ceiling_color = color((int[3]){225, 30, 0});
-	cb3d->cng->floor_color = color((int[3]){220, 100, 0});
+	cb3d->cng->ceiling_color = color((int [3]){229, 228, 226});
+	cb3d->cng->floor_color = color((int [3]){169, 169, 169});
 	cb3d->map = NULL;
 	cb3d->win_data = NULL;
 	cb3d->img = NULL;
@@ -26,10 +26,13 @@ void	init_main_struct(t_cmlx *cb3d, char **gv)
 	cb3d->cng->textures[NO].text_path = "./textures/North.ppm";
 	add_color_arr(cb3d, NO);
 	cb3d->cng->textures[SO].text_path = "./textures/South.ppm";
+	add_color_arr(cb3d, SO);
 	cb3d->cng->textures[EA].text_path = "./textures/East.ppm";
+	add_color_arr(cb3d, EA);
 	cb3d->cng->textures[WE].text_path = "./textures/West.ppm";
-	cb3d->playerx = 0;
-	cb3d->playery = 0;
+	add_color_arr(cb3d, WE);
+	cb3d->pl_x = 0;
+	cb3d->pl_y = 0;
 	cb3d->dir_x = 0;
 	cb3d->dir_y = 0;
 	cb3d->plane_x = 0;
@@ -40,7 +43,7 @@ void	init_main_struct(t_cmlx *cb3d, char **gv)
 	cb3d->fd = open(gv[1], O_RDONLY);
 }
 
-int closewin(t_cmlx *cb3d)
+int	closewin(t_cmlx *cb3d)
 {
 	if (cb3d && cb3d->mlx)
 		mlx_loop_end(cb3d->mlx);
@@ -54,7 +57,7 @@ int	handlevent(int keycode, t_cmlx *cb3d)
 	return (0);
 }
 
-void start_game(t_cmlx *cb3d)
+void	start_game(t_cmlx *cb3d)
 {
 	cb3d->mlx = mlx_init();
 	if (!cb3d->mlx)
@@ -77,16 +80,15 @@ int	main(int gc, char **gv)
 	if (gc != 2 || (gv[0][0] == '.' && gv[0][1] == '.'))
 	{
 		ft_printf("Wrong number of arguments\n");
-		return(1);
+		return (1);
 	}
 	cb3d = malloc(sizeof(t_cmlx));
 	init_main_struct(cb3d, gv);
-	printcolorarr(cb3d->cng->textures[NO].color_arr);
-	/* map_reader(cb3d);
+	map_reader(cb3d);
 	check_map_valid_char(cb3d);
 	check_wall_path(cb3d);
 	cb3d->gridmap = map_to_arr(cb3d->map);
-	start_game(cb3d); */
+	start_game(cb3d);
 	freeall(cb3d);
 	return (0);
 }

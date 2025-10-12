@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: svolkau <gvardovski@icloud.com>            +#+  +:+       +#+        */
+/*   By: svolkau <svolkau@student.42warsaw.pl>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/12 15:46:49 by svolkau           #+#    #+#             */
-/*   Updated: 2025/10/10 15:09:49 by svolkau          ###   ########.fr       */
+/*   Updated: 2025/10/12 18:05:10 by svolkau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,5 +78,10 @@ char	*get_next_line(int fd)
 	tmp = get_line(line);
 	free(content);
 	content = tmp;
+	if (content && *content == '\0')
+	{
+		free(content);
+		content = NULL;
+	}
 	return (line);
 }

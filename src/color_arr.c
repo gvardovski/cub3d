@@ -1,23 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   r_helpers.c                                        :+:      :+:    :+:   */
+/*   color_arr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: svolkau <gvardovski@icloud.com>            +#+  +:+       +#+        */
+/*   By: svolkau <svolkau@student.42warsaw.pl>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/10 13:26:48 by svolkau           #+#    #+#             */
-/*   Updated: 2025/10/10 15:10:49 by svolkau          ###   ########.fr       */
+/*   Updated: 2025/10/12 20:11:22 by svolkau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-int color(int rgb[3])
+int	color(int rgb[3])
 {
 	return ((rgb[0] << 16) | (rgb[1] << 8) | rgb[2]);
 }
 
-void	get_size(t_cmlx *cb3d, int fd,  int texture)
+void	get_size(t_cmlx *cb3d, int fd, int texture)
 {
 	char	*line;
 	char	**splited;
@@ -63,10 +63,10 @@ int	*init_text_arr(int fd, int width, int height)
 	int		i;
 	int		j;
 	int		rgb[3];
-	int		*ret;
+	int		*rez;
 	char	*line;
 
-	ret = malloc(sizeof(int) * height * width);
+	rez = malloc(sizeof(int) * height * width);
 	i = -1;
 	while (++i < height * width)
 	{
@@ -78,30 +78,32 @@ int	*init_text_arr(int fd, int width, int height)
 				rgb[j] = ft_atoi(line);
 			free(line);
 		}
-		ret[i] = color(rgb);
+		rez[i] = color(rgb);
 	}
-	return (ret);
+	return (rez);
 }
 
-void	add_color_arr(t_cmlx *cb3d, int texture)
+void	add_color_arr(t_cmlx *cb3d, int text)
 {
-	int	fd;
-	int i;
-	char *line;
+	int		fd;
+	int		i;
+	char	*line;
 
-	cb3d->cng->textures[texture].type = texture;
-	fd = open(cb3d->cng->textures[texture].text_path, O_RDONLY);
+	cb3d->cng->textures[text].type = text;
+	fd = open(cb3d->cng->textures[text].text_path, O_RDONLY);
 	line = get_next_line(fd);
 	free(line);
-	get_size(cb3d, fd, texture);
-	valid_texture(fd, cb3d->cng->textures[texture].width, cb3d->cng->textures[texture].height);
-	fd = open(cb3d->cng->textures[texture].text_path, O_RDONLY);
+	get_size(cb3d, fd, text);
+	valid_texture(fd, cb3d->cng->textures[text].width,
+		cb3d->cng->textures[text].height);
+	fd = open(cb3d->cng->textures[text].text_path, O_RDONLY);
 	i = -1;
 	while (++i < 3)
 	{
 		line = get_next_line(fd);
 		free(line);
 	}
-	cb3d->cng->textures[texture].color_arr = init_text_arr(fd, cb3d->cng->textures[texture].width, cb3d->cng->textures[texture].height);
+	cb3d->cng->textures[text].color_arr = init_text_arr(fd,
+			cb3d->cng->textures[text].width, cb3d->cng->textures[text].height);
 	close(fd);
 }

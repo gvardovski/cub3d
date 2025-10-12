@@ -3,46 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   map_parser.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: svolkau <gvardovski@icloud.com>            +#+  +:+       +#+        */
+/*   By: svolkau <svolkau@student.42warsaw.pl>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/28 13:57:12 by svolkau           #+#    #+#             */
-/*   Updated: 2025/10/10 14:37:28 by svolkau          ###   ########.fr       */
+/*   Updated: 2025/10/12 20:24:39 by svolkau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
-
-void	freeall(t_cmlx *cb3d)
-{
-	if (!cb3d)
-		return ;
-	if (cb3d->mlx)
-		mlx_loop_end(cb3d->mlx);
-	if (cb3d->mlx && cb3d->img)
-		mlx_destroy_image(cb3d->mlx, cb3d->img);
-	if (cb3d->mlx && cb3d->win)
-		mlx_destroy_window(cb3d->mlx, cb3d->win);
-	if (cb3d->mlx)
-	{
-		mlx_destroy_display(cb3d->mlx);
-		free(cb3d->mlx);
-	}
-	if (cb3d->fd > 0)
-		close(cb3d->fd);
-	if (cb3d->cng)
-		free(cb3d->cng);
-	freemap(&cb3d->map, del);
-	if (cb3d->gridmap)
-		freegridmap(cb3d->gridmap);
-	free(cb3d);
-}
-
-void	error_printer(char *msg, t_cmlx *cb3d)
-{
-	printf("%s\n", msg);
-	freeall(cb3d);
-	exit(1);
-}
 
 int	check_pos(t_cmap *map, t_cmap *priv, int pos, char *set)
 {
@@ -65,8 +33,8 @@ void	check_player_pos(t_cmlx *cb3d, t_cmap *head, t_cmap *priv, int pos)
 	else
 	{
 		cb3d->orient = head->str[pos];
-		cb3d->playerx = pos;
-		cb3d->playery = head->index;
+		cb3d->pl_x = pos;
+		cb3d->pl_y = head->index;
 	}
 	if (!check_pos(head, priv, pos, "10"))
 		error_printer("Not correct player start position", cb3d);
@@ -97,7 +65,7 @@ void	check_map_valid_char(t_cmlx *cb3d)
 		priv = head;
 		head = head->next;
 	}
-	if (cb3d->playerx == 0 && cb3d->playery == 0)
+	if (cb3d->pl_x == 0 && cb3d->pl_y == 0)
 		error_printer("No player start position", cb3d);
 }
 

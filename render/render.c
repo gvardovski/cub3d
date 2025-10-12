@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: svolkau <gvardovski@icloud.com>            +#+  +:+       +#+        */
+/*   By: svolkau <svolkau@student.42warsaw.pl>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/09 15:15:22 by svolkau           #+#    #+#             */
-/*   Updated: 2025/10/10 14:17:31 by svolkau          ###   ########.fr       */
+/*   Updated: 2025/10/12 20:29:07 by svolkau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,20 +48,20 @@ void	draw_cf(t_cmlx *cb3d, char flag)
 {
 	int	x;
 	int	y;
-	int color;
-	int size;
+	int	color;
+	int	size;
 
 	if (flag == 'f')
 	{
 		y = 0;
 		size = HEIGHT / 2;
-		color = cb3d->cng->floor_color;
+		color = cb3d->cng->ceiling_color;
 	}
 	if (flag == 'c')
 	{
-		color = cb3d->cng->ceiling_color;
 		y = (HEIGHT / 2) - 1;
 		size = HEIGHT;
+		color = cb3d->cng->floor_color;
 	}
 	while (++y < size)
 	{
@@ -71,7 +71,7 @@ void	draw_cf(t_cmlx *cb3d, char flag)
 	}
 }
 
-void print_display(t_cmlx *cb3d)
+void	print_display(t_cmlx *cb3d)
 {
 	mlx_destroy_image(cb3d->mlx, cb3d->img);
 	cb3d->img = mlx_new_image(cb3d->mlx, WIDTH, HEIGHT);

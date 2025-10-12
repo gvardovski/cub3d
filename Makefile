@@ -8,11 +8,10 @@ RM = rm -f
 AR = ar rcs
 SRCGET = get_next_line/get_next_line.c \
 	get_next_line/get_next_line_utils.c
-SRC = map_parser/map_parser.c \
-	map_parser/map_parser_add.c \
-	map_parser/map_wall_path.c \
-	render/render.c render/rcaster.c render/rcaster_add.c \
-	render/r_helpers.c cb3d.c
+SRC = map_parser/map_parser.c map_parser/map_parser_add.c map_parser/map_wall_path.c \
+	render/render.c render/rcast.c render/rcast_add.c \
+	src/color_arr.c src/free_data.c src/print.c \
+	cb3d.c
 OBJECTS = $(SRC:.c=.o)
 OBJECTSGET = $(SRCGET:.c=.o)
 %$(SRCDIR).o: %$(SRCDIR).c
