@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_data.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: svolkau <svolkau@student.42warsaw.pl>      +#+  +:+       +#+        */
+/*   By: svolkau <gvardovski@icloud.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/12 17:41:04 by svolkau           #+#    #+#             */
-/*   Updated: 2025/10/12 20:03:45 by svolkau          ###   ########.fr       */
+/*   Updated: 2025/10/13 14:51:49 by svolkau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,14 +59,14 @@ void	freegridmap(char **grid)
 
 void	free_color_arr(t_texture *tex)
 {
-	int	i;
-
-	i = -1;
-	while (++i < 4)
-	{
-		if (tex[i].color_arr)
-			free(tex[i].color_arr);
-	}
+	if (tex[NO].color_arr)
+		free(tex[NO].color_arr);
+	if (tex[SO].color_arr)
+		free(tex[SO].color_arr);
+	if (tex[EA].color_arr)
+		free(tex[EA].color_arr);
+	if (tex[WE].color_arr)
+		free(tex[WE].color_arr);
 }
 
 void	freeall(t_cmlx *cb3d)

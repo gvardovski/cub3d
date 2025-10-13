@@ -3,18 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   cb3d.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: svolkau <svolkau@student.42warsaw.pl>      +#+  +:+       +#+        */
+/*   By: svolkau <gvardovski@icloud.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/05 17:41:46 by svolkau           #+#    #+#             */
-/*   Updated: 2025/10/12 20:23:15 by svolkau          ###   ########.fr       */
+/*   Updated: 2025/10/13 15:04:12 by svolkau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/cub3d.h"
+#include <string.h>
 
-void	init_main_struct(t_cmlx *cb3d, char **gv)
+void	init_main_struct(t_cmlx *cb3d)
 {
 	cb3d->cng = malloc(sizeof(t_config));
+	if (!cb3d->cng)
+		exit(1);
+	memset(cb3d->cng, 0, sizeof(t_config));
 	cb3d->cng->ceiling_color = color((int [3]){229, 228, 226});
 	cb3d->cng->floor_color = color((int [3]){169, 169, 169});
 	cb3d->map = NULL;
@@ -23,13 +27,13 @@ void	init_main_struct(t_cmlx *cb3d, char **gv)
 	cb3d->mlx = NULL;
 	cb3d->win = NULL;
 	cb3d->gridmap = NULL;
-	cb3d->cng->textures[NO].text_path = "./textures/North.ppm";
+	cb3d->cng->textures[NO].text_path = "./textures/North(1).ppm";
 	add_color_arr(cb3d, NO);
-	cb3d->cng->textures[SO].text_path = "./textures/South.ppm";
+	cb3d->cng->textures[SO].text_path = "./textures/South(1).ppm";
 	add_color_arr(cb3d, SO);
-	cb3d->cng->textures[EA].text_path = "./textures/East.ppm";
+	cb3d->cng->textures[EA].text_path = "./textures/East(1).ppm";
 	add_color_arr(cb3d, EA);
-	cb3d->cng->textures[WE].text_path = "./textures/West.ppm";
+	cb3d->cng->textures[WE].text_path = "./textures/West(1).ppm";
 	add_color_arr(cb3d, WE);
 	cb3d->pl_x = 0;
 	cb3d->pl_y = 0;
@@ -40,7 +44,7 @@ void	init_main_struct(t_cmlx *cb3d, char **gv)
 	cb3d->bpp = -1;
 	cb3d->endian = -1;
 	cb3d->size_line = -1;
-	cb3d->fd = open(gv[1], O_RDONLY);
+	cb3d->fd = 0;
 }
 
 int	closewin(t_cmlx *cb3d)
@@ -83,7 +87,8 @@ int	main(int gc, char **gv)
 		return (1);
 	}
 	cb3d = malloc(sizeof(t_cmlx));
-	init_main_struct(cb3d, gv);
+	init_main_struct(cb3d);
+	cb3d->fd = open(gv[1], O_RDONLY);
 	map_reader(cb3d);
 	check_map_valid_char(cb3d);
 	check_wall_path(cb3d);

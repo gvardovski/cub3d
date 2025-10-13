@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: svolkau <svolkau@student.42warsaw.pl>      +#+  +:+       +#+        */
+/*   By: svolkau <gvardovski@icloud.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/28 12:31:12 by svolkau           #+#    #+#             */
-/*   Updated: 2025/10/12 20:46:41 by svolkau          ###   ########.fr       */
+/*   Updated: 2025/10/13 13:17:44 by svolkau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,6 @@ typedef struct s_mlx
 	int					draw_start;
 	int					draw_end;
 	int					line_height;
-	char				**gridmap;
 	int					side;
 	int					step_x;
 	int					step_y;
@@ -96,6 +95,7 @@ typedef struct s_mlx
 	int					bpp;
 	char				orient;
 	int					fd;
+	char				**gridmap;
 	char				*win_data;
 	void				*mlx;
 	void				*win;
