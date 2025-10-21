@@ -6,7 +6,7 @@
 /*   By: svolkau <gvardovski@icloud.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/28 12:31:12 by svolkau           #+#    #+#             */
-/*   Updated: 2025/10/13 13:17:44 by svolkau          ###   ########.fr       */
+/*   Updated: 2025/10/21 14:17:12 by svolkau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,5 +132,6 @@ void	draw_object(t_cmlx *cb3d);
 void	add_color_arr(t_cmlx *cb3d, int texture);
 int		color(int rgb[3]);
 void	printcolorarr(t_texture tex);
+void	move_forward(t_cmlx *cb3d);
 
 #endif

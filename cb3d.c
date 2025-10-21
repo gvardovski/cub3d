@@ -6,7 +6,7 @@
 /*   By: svolkau <gvardovski@icloud.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/05 17:41:46 by svolkau           #+#    #+#             */
-/*   Updated: 2025/10/13 15:04:12 by svolkau          ###   ########.fr       */
+/*   Updated: 2025/10/21 14:35:20 by svolkau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,22 @@ int	closewin(t_cmlx *cb3d)
 
 int	handlevent(int keycode, t_cmlx *cb3d)
 {
+	printf("Keycode = %d\n", keycode);
 	if (keycode == KEY_ESC)
 		closewin(cb3d);
+	if (keycode == KEY_W)
+		move_forward(cb3d);
+	/* if (keycode == KEY_S)
+		move_backward(cb3d);
+	if (keycode == KEY_A)
+		move_left(cb3d);
+	if (keycode == KEY_D)
+		move_right(cb3d);
+	if (keycode == KEY_LEFT)
+		turn_left(cb3d);
+	if (keycode == KEY_RIGHT)
+		turn_right(cb3d); */
+	print_display(cb3d);
 	return (0);
 }
 
@@ -74,6 +88,8 @@ void	start_game(t_cmlx *cb3d)
 	print_display(cb3d);
 	mlx_hook(cb3d->win, 17, 0, closewin, cb3d);
 	mlx_key_hook(cb3d->win, handlevent, cb3d);
+	/* mlx_hook(cb3d->win, 2, 1L << 0, handlevent, cb3d);
+	mlx_hook(cb3d->win, 33, 0, closewin, cb3d->mlx); */
 	mlx_loop(cb3d->mlx);
 }
 

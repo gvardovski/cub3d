@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_parser.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: svolkau <svolkau@student.42warsaw.pl>      +#+  +:+       +#+        */
+/*   By: svolkau <gvardovski@icloud.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/28 13:57:12 by svolkau           #+#    #+#             */
-/*   Updated: 2025/10/12 20:24:39 by svolkau          ###   ########.fr       */
+/*   Updated: 2025/10/15 10:58:28 by svolkau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,8 @@ void	check_map_valid_char(t_cmlx *cb3d)
 		{
 			if (!ft_strchr("EWNS10", head->str[i]) && !ft_isspace(head->str[i]))
 				error_printer("Not correct character in map", cb3d);
-			if (head->str[i] == ' ')
-				head->str[i] = '2';
+			/* if (head->str[i] == ' ')
+				head->str[i] = '2'; */
 			if (head->str[i] == '0' && !check_pos(head, priv, i, "EWNS10"))
 				error_printer("Wall or floor is not correct", cb3d);
 			if (ft_strchr("EWNS", head->str[i]))
