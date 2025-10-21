@@ -9,7 +9,8 @@ AR = ar rcs
 SRCGET = get_next_line/get_next_line.c \
 	get_next_line/get_next_line_utils.c
 SRC = map_parser/map_parser.c map_parser/map_parser_add.c map_parser/map_wall_path.c \
-	render/render.c render/rcast.c render/rcast_add.c render/moves.c \
+	render/render.c render/rcast.c render/rcast_add.c \
+	game/moves.c game/turns.c \
 	src/color_arr.c src/free_data.c src/print.c \
 	cb3d.c
 OBJECTS = $(SRC:.c=.o)

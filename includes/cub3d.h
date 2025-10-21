@@ -6,7 +6,7 @@
 /*   By: svolkau <gvardovski@icloud.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/28 12:31:12 by svolkau           #+#    #+#             */
-/*   Updated: 2025/10/21 14:17:12 by svolkau          ###   ########.fr       */
+/*   Updated: 2025/10/21 20:12:38 by svolkau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@
 # include "../minilibx-linux/mlx.h"
 # include <errno.h>
 # include <math.h>
+# include <X11/X.h>
+# include <sys/time.h>
 
 # define HEIGHT 768
 # define WIDTH 1024
@@ -133,5 +135,10 @@ void	add_color_arr(t_cmlx *cb3d, int texture);
 int		color(int rgb[3]);
 void	printcolorarr(t_texture tex);
 void	move_forward(t_cmlx *cb3d);
+void	move_backward(t_cmlx *cb3d);
+void	move_left(t_cmlx *cb3d);
+void	move_right(t_cmlx *cb3d);
+void	turn_left(t_cmlx *cb3d);
+void	turn_right(t_cmlx *cb3d);
 
 #endif
